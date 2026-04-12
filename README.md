@@ -4,7 +4,7 @@ Este es el repositorio central de **JHEMC SPORT**, un E-commerce de alto rendimi
 
 ## 🚀 Acceso Rápido (Servidor Local)
 Si tu computadora está encendida, usa este link:
-🔗 **Link Público:** [https://shiny-humans-love.loca.lt](https://shiny-humans-love.loca.lt)
+🔗 **Link Público:** [https://soft-melons-return.loca.lt](https://soft-melons-return.loca.lt)
 
 ## 🌍 Despliegue Permanente (24/7 Gratis)
 Haz clic en el botón de abajo para subirlo a internet de forma permanente:
