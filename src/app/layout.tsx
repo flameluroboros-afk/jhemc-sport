@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -30,11 +28,8 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${inter.variable} font-inter antialiased selection:bg-brand-neon selection:text-brand-dark bg-brand-dark text-white`}
       >
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );
 }
-

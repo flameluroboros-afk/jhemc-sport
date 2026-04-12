@@ -12,15 +12,16 @@ export default async function InventoryPage() {
 
   const mappedProducts = products.map(p => ({
     ...p,
-    category: p.category.name,
-    sizes: p.sizes.split(',')
+    category: p.category?.name || 'SIN CATEGORÍA',
+    sizes: (p.sizes || "").split(',').filter(s => s)
   }));
-
-  const categoryNames = categories.map(c => c.name);
 
   return (
     <Suspense fallback={<div className="pt-40 text-center font-black italic uppercase">CARGANDO INVENTARIO...</div>}>
-      <InventoryClient products={mappedProducts as any} categories={categoryNames} />
+      <InventoryClient 
+        products={mappedProducts as any} 
+        categories={categories} 
+      />
     </Suspense>
   );
 }

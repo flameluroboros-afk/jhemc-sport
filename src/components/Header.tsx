@@ -30,10 +30,7 @@ export default function Header() {
             <Link href="/catalog" className="text-sm font-medium hover:text-brand-neon transition-colors">
               CATÁLOGO
             </Link>
-            <Link href="/admin" className="flex items-center space-x-1 text-sm font-medium text-white/60 hover:text-white transition-colors">
-              <LayoutDashboard size={16} />
-              <span>ADMIN</span>
-            </Link>
+
           </nav>
 
           {/* Icons */}
@@ -64,7 +61,7 @@ export default function Header() {
         <div className="px-4 pt-2 pb-6 space-y-4">
           <Link href="/" className="block text-lg font-bold" onClick={() => setIsOpen(false)}>INICIO</Link>
           <Link href="/catalog" className="block text-lg font-bold" onClick={() => setIsOpen(false)}>CATÁLOGO</Link>
-          <Link href="/admin" className="block text-lg font-bold text-white/50" onClick={() => setIsOpen(false)}>ADMIN PANEL</Link>
+
         </div>
       </div>
     </header>

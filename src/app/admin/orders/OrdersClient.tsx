@@ -98,13 +98,22 @@ export default function OrdersClient({ orders }: { orders: Order[] }) {
                           {order.status}
                         </span>
                       </div>
-                      <p className="text-white font-bold italic tracking-tight text-lg uppercase">{order.customerName}</p>
+                      <p className="text-white font-bold italic tracking-tight text-lg uppercase">
+                        {order.customerName.split(' | ')[0]}
+                      </p>
                       <div className="flex flex-wrap gap-4 text-[10px] font-black italic text-white/30 tracking-widest uppercase mt-1">
                         <span>{order.items.length} ARTÍCULOS</span>
                         <span>•</span>
                         <span>{formatDate(order.createdAt)}</span>
-                        <span>•</span>
                         <span>TEL: {order.customerPhone}</span>
+                      </div>
+                      <div className="mt-3 py-2 px-3 bg-white/5 border border-white/5 inline-flex items-center space-x-2">
+                        <span className="text-[9px] font-black italic text-brand-neon tracking-widest uppercase">ENVÍO A:</span>
+                        <span className="text-[11px] font-bold italic text-white/80 uppercase">
+                          {order.customerName.includes(' | DIR: ') 
+                            ? order.customerName.split(' | DIR: ')[1] 
+                            : 'No especificada'}
+                        </span>
                       </div>
                     </div>
                   </div>

@@ -18,14 +18,14 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { customerName, customerPhone, items } = body;
+    const { customerName, customerPhone, customerAddress, items } = body;
 
     // items: [{ productId, quantity, price, size }]
     const total = items.reduce((sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity, 0);
 
-    const order = await prisma.order.create({
+    const order = await (prisma.order as any).create({
       data: {
-        customerName,
+        customerName: `${customerName} | DIR: ${customerAddress}`,
         customerPhone,
         total,
         status: 'PENDIENTE',
@@ -52,8 +52,12 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(order, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating order:', error);
-    return NextResponse.json({ error: 'Error al crear el pedido' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Error al crear el pedido', 
+      details: error.message,
+      code: error.code 
+    }, { status: 500 });
   }
 }

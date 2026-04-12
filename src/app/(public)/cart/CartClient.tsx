@@ -7,17 +7,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Cart() {
+export default function CartClient({ storePhone }: { storePhone: string }) {
   const { cart, removeItem, updateQuantity, getTotal, clearCart } = useCart();
   const total = getTotal();
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [customerAddress, setCustomerAddress] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
+  const STORE_PHONE = storePhone || "51925207612"; // NÚMERO DE EDWARD JHEMC SPORT
+
   const handleWhatsAppOrder = async () => {
-    if (!customerName.trim() || !customerPhone.trim()) {
-      alert('Por favor completa tu nombre y número de WhatsApp');
+    if (!customerName.trim() || !customerPhone.trim() || !customerAddress.trim()) {
+      alert('Por favor completa tu nombre, celular y dirección de envío');
       return;
     }
 
@@ -38,6 +41,7 @@ export default function Cart() {
         body: JSON.stringify({
           customerName,
           customerPhone,
+          customerAddress,
           items: orderItems,
         }),
       });
@@ -46,19 +50,27 @@ export default function Cart() {
 
       const order = await res.json();
 
-      // 2. Generar mensaje de WhatsApp con el ID del pedido
-      const message = `🚀 *NUEVO PEDIDO JHEMC SPORT*\n` +
-        `📋 *Orden:* #J-${order.id.slice(-6).toUpperCase()}\n` +
-        `👤 *Cliente:* ${customerName}\n\n` +
-        cart.map((item) => `▸ ${item.name} (Talla: ${item.selectedSize}) x${item.quantity}: ${formatCurrency(item.price * item.quantity)}`).join('\n') +
-        `\n\n💰 *TOTAL:* ${formatCurrency(total)}\n\n` +
-        `👋 ¡Hola! Me gustaría coordinar el pago y la entrega.`;
+      // 2. Generar mensaje de WhatsApp con formato de SEGURIDAD Y ÉLITE
+      const orderCode = `J-${order.id.slice(-6).toUpperCase()}`;
+      const message = 
+        `🛡️ *VERIFICACIÓN DE PEDIDO - JHEMC SPORT* 🛡️\n\n` +
+        `✅ *CÓDIGO DE SEGURIDAD:* \`${orderCode}\`\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+        `👤 *CLIENTE:* ${customerName.toUpperCase()}\n` +
+        `📍 *DIRECCIÓN:* ${customerAddress.toUpperCase()}\n` +
+        `📞 *CONTACTO:* ${customerPhone}\n\n` +
+        `📦 *EQUIPO SOLICITADO:*\n` +
+        cart.map((item) => `▪️ ${item.name} (${item.selectedSize}) x${item.quantity}`).join('\n') +
+        `\n\n` +
+        `💰 *TOTAL A PAGAR:* ${formatCurrency(total)}\n\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `⚡ _Confirmo que mi pedido con código *${orderCode}* es correcto. Deseo proceder con el pago._`;
 
       const encodedMessage = encodeURIComponent(message);
 
-      // 3. Limpiar carrito y abrir WhatsApp
+      // 3. Limpiar carrito y abrir WhatsApp DE LA TIENDA
       clearCart();
-      window.open(`https://wa.me/51${customerPhone}?text=${encodedMessage}`, '_blank');
+      window.open(`https://wa.me/${STORE_PHONE}?text=${encodedMessage}`, '_blank');
     } catch (error) {
       console.error(error);
       alert('Hubo un error al registrar tu pedido. Inténtalo de nuevo.');
@@ -162,7 +174,17 @@ export default function Cart() {
                     type="tel" 
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="987654321"
+                    placeholder="Ej: 987654321"
+                    className="w-full bg-brand-dark border border-white/10 px-4 py-3 text-sm font-bold italic outline-none focus:border-brand-neon/50 transition-all placeholder:text-white/20"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black italic tracking-widest text-white/40 mb-2">DIRECCIÓN DE ENTREGA</label>
+                  <input 
+                    type="text" 
+                    value={customerAddress}
+                    onChange={(e) => setCustomerAddress(e.target.value)}
+                    placeholder="Ej: Av. Las Flores 123, Ayacucho"
                     className="w-full bg-brand-dark border border-white/10 px-4 py-3 text-sm font-bold italic outline-none focus:border-brand-neon/50 transition-all placeholder:text-white/20"
                   />
                 </div>

@@ -15,16 +15,20 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, description, basePrice, image, stock, sizes, categoryId } = body;
+    const { name, description, basePrice, image, stock, sizes, categoryId, onSale, salePrice } = body;
 
-    const product = await prisma.product.create({
+    const product = await (prisma.product as any).create({
       data: {
         name,
         description,
-        basePrice: parseFloat(basePrice),
-        price: calcularPrecioVenta(parseFloat(basePrice)),
+        basePrice: parseFloat(basePrice) || 0,
+        price: onSale && salePrice && !isNaN(parseFloat(salePrice)) 
+          ? parseFloat(salePrice) 
+          : calcularPrecioVenta(parseFloat(basePrice) || 0),
+        onSale: Boolean(onSale),
+        salePrice: salePrice && !isNaN(parseFloat(salePrice)) ? parseFloat(salePrice) : null,
         image,
-        stock: parseInt(stock),
+        stock: parseInt(stock) || 0,
         sizes,
         categoryId,
       },

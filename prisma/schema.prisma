@@ -27,6 +27,8 @@ model Product {
   image       String
   stock       Int         @default(0)
   sizes       String      // "S,M,L,XL" or "38,39,40"
+  onSale      Boolean     @default(false)
+  salePrice   Float?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   
@@ -39,6 +41,7 @@ model Order {
   id            String      @id @default(cuid())
   customerName  String
   customerPhone String
+  customerAddress String   @default("No especificada")
   total         Float
   status        String      @default("PENDIENTE") // PENDIENTE, ENVIADO, ENTREGADO, CANCELADO
   createdAt     DateTime    @default(now())
@@ -56,4 +59,11 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
   orderId   String
   order     Order   @relation(fields: [orderId], references: [id])
+}
+
+model GlobalSettings {
+  id               String @id @default("main")
+  storeWhatsApp    String @default("51925207612")
+  storeEmail       String @default("admin@jhemcsport.com")
+  updatedAt        DateTime @updatedAt
 }

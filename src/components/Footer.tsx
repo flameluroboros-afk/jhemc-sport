@@ -38,9 +38,9 @@ export default function Footer() {
               <li><Link href="/catalog" className="hover:text-brand-neon transition-colors">CATÁLOGO COMPLETO</Link></li>
               <li><Link href="/catalog?cat=Calzado" className="hover:text-brand-neon transition-colors">ZAPATILLAS</Link></li>
               <li><Link href="/catalog?cat=Ropa" className="hover:text-brand-neon transition-colors">ROPA TÉCNICA</Link></li>
-              <li><Link href="/admin" className="text-white/30 hover:text-white transition-colors">ACCESO ADMIN</Link></li>
             </ul>
           </div>
+
 
           {/* Support */}
           <div>
