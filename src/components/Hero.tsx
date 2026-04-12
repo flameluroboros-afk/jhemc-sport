@@ -16,7 +16,7 @@ export default function Hero() {
           <ArrowRight size={12} className="text-brand-neon group-hover:translate-x-1 transition-transform" />
         </div>
 
-        <h1 className="text-6xl md:text-9xl font-black tracking-tighter italic leading-none mb-8">
+        <h1 className="font-oswald text-6xl md:text-9xl font-black tracking-tighter italic leading-none mb-8 uppercase">
           EL PODER DE <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-accent">
             SUPERARTE
@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
           <Link 
             href="/catalog" 
-            className="w-full sm:w-auto px-10 py-5 bg-brand-neon text-brand-dark font-black tracking-tighter italic text-lg rounded-none hover:scale-105 transition-transform flex items-center justify-center group"
+            className="w-full sm:w-auto px-10 py-5 bg-brand-neon text-brand-dark font-oswald font-black tracking-tighter italic text-lg rounded-none hover:scale-105 transition-transform flex items-center justify-center group"
           >
             COMPRAR AHORA
             <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -47,7 +47,7 @@ export default function Hero() {
 
       {/* Hero Stats */}
       <div className="absolute bottom-10 left-0 w-full px-4 sm:px-8 hidden md:block">
-        <div className="max-w-7xl mx-auto flex justify-between items-end border-t border-white/10 pt-8 text-white/30 font-black italic text-4xl">
+        <div className="max-w-7xl mx-auto flex justify-between items-end border-t border-white/10 pt-8 text-white/30 font-oswald font-black italic text-4xl">
           <span>HIGH PERFORMANCE</span>
           <span>EST. 2024</span>
           <span>NEXT GEN SPORT</span>

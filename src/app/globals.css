@@ -5,6 +5,8 @@
   --color-brand-dark: #050505;
   --color-brand-gray: #121212;
   --color-brand-accent: #00e5ff;
+  --font-oswald: var(--font-oswald);
+  --font-inter: var(--font-inter);
 }
 
 :root {
@@ -32,7 +34,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

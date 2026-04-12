@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Logo & Manifesto */}
           <div className="col-span-1 md:col-span-2">
-            <span className="text-3xl font-black tracking-tighter italic text-brand-neon block mb-6">
+            <span className="text-3xl font-oswald font-black tracking-tighter italic text-brand-neon block mb-6">
               JHEMC<span className="text-white">SPORT</span>
             </span>
             <p className="text-white/50 max-w-sm mb-8 font-medium leading-relaxed">

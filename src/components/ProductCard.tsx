@@ -32,10 +32,10 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-bold tracking-tight group-hover:text-brand-neon transition-colors">
+          <h3 className="font-oswald text-xl font-bold tracking-tight group-hover:text-brand-neon transition-colors uppercase">
             {product.name}
           </h3>
-          <span className="text-2xl font-black italic">
+          <span className="font-oswald text-2xl font-black italic">
             {formatCurrency(product.price)}
           </span>
         </div>

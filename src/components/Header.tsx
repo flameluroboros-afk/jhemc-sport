@@ -17,7 +17,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-black tracking-tighter italic text-brand-neon">
+            <span className="text-2xl font-oswald font-black tracking-tighter italic text-brand-neon">
               JHEMC<span className="text-white">SPORT</span>
             </span>
           </Link>
