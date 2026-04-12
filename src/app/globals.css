@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-neon: #ccff00;
+  --color-brand-dark: #050505;
+  --color-brand-gray: #121212;
+  --color-brand-accent: #00e5ff;
+}
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --card: #121212;
+  --card-foreground: #ffffff;
+  --popover: #050505;
+  --popover-foreground: #ffffff;
+  --primary: #ccff00;
+  --primary-foreground: #050505;
+  --secondary: #121212;
+  --secondary-foreground: #ffffff;
+  --muted: #121212;
+  --muted-foreground: #a1a1aa;
+  --accent: #00e5ff;
+  --accent-foreground: #050505;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #ccff00;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glass {
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neon-shadow {
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+}
+
+.neon-border {
+  border: 1px solid #ccff00;
+}
+
