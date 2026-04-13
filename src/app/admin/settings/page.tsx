@@ -1,16 +1,21 @@
-import { join } from 'path';
-import { readFile } from 'fs/promises';
+import { prisma } from '@/lib/prisma';
 import SettingsClient from './SettingsClient';
 
 export default async function SettingsPage() {
-  const path = join(process.cwd(), 'src/data/settings.json');
   let settings = { storeWhatsApp: "51925207612", storeEmail: "admin@jhemcsport.com" };
 
   try {
-    const data = await readFile(path, 'utf8');
-    settings = JSON.parse(data);
+    const dbSettings = await prisma.globalSettings.findUnique({
+      where: { id: 'main' }
+    });
+    if (dbSettings) {
+      settings = {
+        storeWhatsApp: dbSettings.storeWhatsApp,
+        storeEmail: dbSettings.storeEmail
+      };
+    }
   } catch (e) {
-    console.log('Settings file not found, using defaults.');
+    console.log('Settings in DB not found, using defaults.');
   }
 
   return <SettingsClient settings={settings} />;

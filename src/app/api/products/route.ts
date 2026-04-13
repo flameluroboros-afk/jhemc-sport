@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { calcularPrecioVenta } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 // GET - Listar todos los productos
 export async function GET() {
   const products = await prisma.product.findMany({

@@ -12,6 +12,8 @@ import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboard() {
   const productsCount = await prisma.product.count();
   const ordersCount = await prisma.order.count();

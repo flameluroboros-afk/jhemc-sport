@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
+import { createClient } from '@supabase/supabase-js';
+
+export const dynamic = 'force-dynamic';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,22 +13,36 @@ export async function POST(req: NextRequest) {
     const file = formData.get('file') as File;
 
     if (!file) {
-      return NextResponse.json({ error: 'No se subió ningún archivo' }, { status: 400 });
+      return NextResponse.json({ error: 'No se subi ningn archivo' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    // Crear un nombre único para el archivo
+    // Crear un nombre nico para el archivo
     const fileName = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
-    const path = join(process.cwd(), 'public/uploads', fileName);
 
-    await writeFile(path, buffer);
-    const publicPath = `/uploads/${fileName}`;
+    // Subir a Supabase Storage
+    const { data, error } = await supabase.storage
+      .from('products')
+      .upload(fileName, buffer, {
+        contentType: file.type,
+        upsert: false
+      });
 
-    return NextResponse.json({ url: publicPath });
+    if (error) {
+      console.error('Error uploading to Supabase:', error);
+      throw error;
+    }
+
+    // Obtener la URL pblica
+    const { data: { publicUrl } } = supabase.storage
+      .from('products')
+      .getPublicUrl(fileName);
+
+    return NextResponse.json({ url: publicUrl });
   } catch (error) {
     console.error('Error uploading file:', error);
-    return NextResponse.json({ error: 'Error al subir la imagen' }, { status: 500 });
+    return NextResponse.json({ error: 'Error al subir la imagen a la nube' }, { status: 500 });
   }
 }

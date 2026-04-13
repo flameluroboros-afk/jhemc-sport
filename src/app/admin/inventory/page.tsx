@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma';
 import InventoryClient from './InventoryClient';
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function InventoryPage() {
   const products = await prisma.product.findMany({
     include: { category: true },

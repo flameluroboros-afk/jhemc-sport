@@ -6,8 +6,10 @@ import { useCart } from '@/lib/store';
 import { formatCurrency } from '@/lib/utils';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ShoppingCart, ArrowLeft, ShieldCheck, Box, Zap } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, ShieldCheck, Box, Zap, Heart, Share2 } from 'lucide-react';
 import Link from 'next/link';
+import ProductTabs from '@/components/ProductTabs';
+import ProductCard from '@/components/ProductCard';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -109,6 +111,18 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+
+      <ProductTabs />
+
+      {/* Related Products */}
+      <section className="mt-32">
+        <h2 className="text-3xl font-black italic tracking-tighter mb-10 uppercase">TAMBIÉN PODRÍA INTERESARTE</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {MOCK_PRODUCTS.filter(p => p.id !== product.id).slice(0, 4).map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

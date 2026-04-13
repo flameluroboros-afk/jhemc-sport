@@ -24,6 +24,7 @@ export default function AdminLayout({
   const navItems = [
     { name: 'DASHBOARD', href: '/admin', icon: BarChart3 },
     { name: 'INVENTARIO', href: '/admin/inventory', icon: Package },
+    { name: 'CATEGORÍAS', href: '/admin/categories', icon: ShieldCheck },
     { name: 'PEDIDOS', href: '/admin/orders', icon: ShoppingBag },
     { name: 'AJUSTES', href: '/admin/settings', icon: Settings },
   ];

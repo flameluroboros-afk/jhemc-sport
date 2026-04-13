@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterJhemc from "@/components/FooterJhemc";
+import WhatsAppFloating from "@/components/WhatsAppFloating";
+import Cursor from "@/components/Cursor";
 
 export default function PublicLayout({
   children,
@@ -8,9 +10,11 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <Cursor />
       <Header />
       {children}
-      <Footer />
+      <FooterJhemc />
+      <WhatsAppFloating />
     </>
   );
 }

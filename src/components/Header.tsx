@@ -1,18 +1,30 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, LayoutDashboard, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { ShoppingCart, LayoutDashboard, Menu, X, User } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/lib/store';
 import { cn } from '@/lib/utils';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const cart = useCart((state) => state.cart);
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 w-full z-50 glass border-b border-white/10">
+    <header className={cn(
+      "fixed top-0 w-full z-50 transition-all duration-300 border-b",
+      isScrolled ? "bg-brand-dark/90 backdrop-blur-xl border-white/10 py-2" : "bg-transparent border-transparent py-4"
+    )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

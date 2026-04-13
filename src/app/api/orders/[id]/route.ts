@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 // PATCH - Actualizar el estado de un pedido
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {

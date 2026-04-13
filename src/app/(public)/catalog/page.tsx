@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma';
 import CatalogClient from './CatalogClient';
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CatalogPage() {
   const products = await prisma.product.findMany({
     include: { category: true },

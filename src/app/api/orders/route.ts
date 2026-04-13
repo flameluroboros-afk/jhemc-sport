@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 // GET - Listar todos los pedidos
 export async function GET() {
   const orders = await prisma.order.findMany({
