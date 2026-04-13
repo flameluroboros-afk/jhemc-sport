@@ -1,4 +1,5 @@
-import Hero from "@/components/Hero";
+import SneakerHero from "@/components/SneakerHero";
+import TechSpotlight from "@/components/TechSpotlight";
 import ProductCard from "@/components/ProductCard";
 import { prisma } from "@/lib/prisma";
 import { ArrowRight } from "lucide-react";
@@ -28,7 +29,7 @@ export default async function Home() {
 
   return (
     <div className="bg-brand-dark pb-20">
-      <Hero />
+      <SneakerHero />
       
       {/* Hype Marquee */}
       <Reveal>
@@ -48,7 +49,11 @@ export default async function Home() {
         </div>
       </Reveal>
 
-      <Reveal><TrustBadges /></Reveal>
+      <div className="relative z-10 -mt-10">
+        <Reveal><TrustBadges /></Reveal>
+      </div>
+
+      <TechSpotlight />
 
       {/* Featured Products */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">

@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-neon: #ccff00;
+  --color-brand-neon: hsl(72, 100%, 50%);
+  --color-brand-neon-soft: hsla(72, 100%, 50%, 0.1);
   --color-brand-dark: #050505;
-  --color-brand-gray: #121212;
+  --color-brand-gray: #0a0a0a;
   --color-brand-accent: #00e5ff;
   --font-oswald: var(--font-oswald);
   --font-inter: var(--font-inter);
 }
 
 :root {
+  --neon-glow: 0 0 20px rgba(204, 255, 0, 0.4);
+  --shadow-luxury: 0 20px 50px rgba(0, 0, 0, 0.5);
   --background: #050505;
   --foreground: #ffffff;
   --card: #121212;
@@ -39,27 +42,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.glass {
-  background: rgba(18, 18, 18, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Luxury Utilities */
+.glass-neon {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(204, 255, 0, 0.1);
+  box-shadow: var(--neon-glow);
 }
 
-.neon-shadow {
-  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+.text-behind {
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
-.neon-border {
-  border: 1px solid #ccff00;
+.magnetic-btn {
+  transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.magnetic-btn:hover {
+  transform: scale(1.05);
 }
 
-.animate-marquee {
-  animation: marquee 20s linear infinite;
+/* Performance Animations */
+@keyframes sneaker-float {
+  0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 40px 30px rgba(204, 255, 0, 0.1)); }
+  50% { transform: translateY(-30px) rotate(5deg); filter: drop-shadow(0 80px 60px rgba(204, 255, 0, 0.2)); }
+}
+
+.animate-sneaker-float {
+  animation: sneaker-float 8s ease-in-out infinite;
 }
 
 @keyframes scanline {
